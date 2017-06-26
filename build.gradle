@@ -41,3 +41,5 @@ publishing {
         }
     }
 }
+
+group=org.rundeck.rundeck-plugins
