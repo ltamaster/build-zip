@@ -1,6 +1,4 @@
 
-defaultTasks 'build'
-
 configurations {
     create('default')
 }
@@ -31,7 +29,7 @@ task pluginZip(type: Jar) {
     }
 }
 
-
+apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 publishing {
