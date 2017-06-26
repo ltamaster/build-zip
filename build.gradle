@@ -31,3 +31,13 @@ task pluginZip(type: Jar) {
     }
 }
 
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        mavenZip(MavenPublication) {
+            artifact pluginZip
+        }
+    }
+}
