@@ -1,4 +1,6 @@
 
+defaultTasks 'build'
+
 configurations {
     create('default')
 }
