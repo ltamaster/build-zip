@@ -8,9 +8,9 @@ task pluginZip(type: Jar) {
     extension = 'zip'
 
     println project.ext.archivesBaseName
-    println project.buildDir
+    println project.ext.pluginBaseDir
 
-	from ("${project.ext.pluginBaseDir}"){
+    from ("${project.ext.pluginBaseDir}"){
         include("*.yaml")
         include("resources/*")
         include("contents/*")
