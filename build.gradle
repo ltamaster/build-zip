@@ -8,6 +8,7 @@ task pluginZip(type: Jar) {
     extension = 'zip'
     
     println baseName
+    printlm archiveFilename
     println version
     
     from ("${project.ext.pluginBaseFolder}"){
