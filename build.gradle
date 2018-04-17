@@ -7,6 +7,9 @@ task pluginZip(type: Jar) {
     version = project.version
     extension = 'zip'
     
+    println baseName
+    println version
+    
     from ("${project.ext.pluginBaseFolder}"){
         include("*.yaml")
         include("resources/*")
