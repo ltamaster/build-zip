@@ -55,8 +55,12 @@ pluginZip.doFirst {
             include '**/*.png'
             into "resources"
         }
+        
+        print "${project.projectDir}"
 
         from("${project.projectDir}") {
+            print it
+            print "replacing token"
             filter(ReplaceTokens, tokens: tokens)
             exclude 'assets'
             exclude '**/*.png'
