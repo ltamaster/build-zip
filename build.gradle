@@ -77,8 +77,6 @@ publishing {
     }
 }
 
-
-
 defaultTasks 'clean', 'build','pluginZip'
 
 task build(dependsOn: ['pluginZip']) << {
