@@ -30,10 +30,10 @@ task pluginZip(type: Jar) {
 }
 
 pluginZip.doFirst {
-    def assetsDir = "${project.buildDir}/assets/resources"
+    def assetsDir = "${project.buildDir}/resources"
     def assetsMap = new Properties()
-    def assetsManifest = file("${assetsDir}/manifest.properties")
-    assetsManifest.withInputStream(assetsMap.&load)
+    ////def assetsManifest = file("${assetsDir}/manifest.properties")
+    //assetsManifest.withInputStream(assetsMap.&load)
     def tokens = assetsMap + [
             version    : version,
             date       : new Date().toString(),
@@ -50,12 +50,12 @@ pluginZip.doFirst {
         }
 
         //to avoid the icon.png file will be unreadable
-        from("${project.projectDir}/src/main/rdplugin/resources"){
+        from("${project.projectDir}/resources"){
             include '**/*.png'
             into "resources"
         }
 
-        from("${project.projectDir}/src/main/rdplugin") {
+        from("${project.projectDir}") {
             filter(ReplaceTokens, tokens: tokens)
             exclude 'assets'
             exclude '**/*.png'
