@@ -40,15 +40,12 @@ pluginZip.doFirst {
             name       : archivesBaseName.toString(),
     ]
     
-    println "en doFirst"
     copy {
         //load asset mapping
         from(assetsDir) {
             into 'resources'
         }
         
-        println "en copy"
-
         //to avoid the icon.png file will be unreadable
         from("${project.projectDir}/resources"){
             include '**/*.png'
@@ -57,9 +54,7 @@ pluginZip.doFirst {
         
         println "${project.projectDir}"
 
-        from("${project.projectDir}/plugin.yaml") {
-            println it.toString()
-            println "replacing token"
+        from("${project.projectDir}") {
             filter(ReplaceTokens, tokens: tokens)
             exclude 'assets'
             exclude '**/*.png'
