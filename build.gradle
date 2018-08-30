@@ -6,19 +6,14 @@ task pluginZip(type: Jar) {
     destinationDir = file("build/libs")
     baseName = project.ext.archivesBaseName
     version = project.version
+    classifier = 'plugin'
     extension = 'zip'
-    
-    println "baseName: ${baseName}"
-    println "archiveFilename: ${archiveFilename}"
-    println "version:  ${version}"
-    
-    from ("${project.ext.pluginBaseFolder}"){
-        include("*.yaml")
-        include("resources/*")
-        include("contents/*")
+
+    from("${project.buildDir}/zip-contents") {
         into(archiveFilename)
+        //exclude "resources/manifest.properties"
     }
-   
+
     manifest {
         attributes 'Rundeck-Plugin-Name': pluginName.toString(),
                    'Rundeck-Plugin-Description': pluginDescription.toString(),
