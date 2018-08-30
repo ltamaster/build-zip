@@ -62,7 +62,7 @@ pluginZip.doFirst {
         
         println "${project.projectDir}"
 
-        from("${project.projectDir}/") {
+        from("${project.projectDir}/plugin.yaml") {
             println it.toString()
             println "replacing token"
             filter(ReplaceTokens, tokens: tokens)
