@@ -63,7 +63,7 @@ pluginZip.doFirst {
         println "${project.projectDir}"
 
         from("${project.projectDir}") {
-            println it.name
+            println it.toString()
             println "replacing token"
             filter(ReplaceTokens, tokens: tokens)
             exclude 'assets'
