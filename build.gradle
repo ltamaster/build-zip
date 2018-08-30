@@ -6,7 +6,7 @@ task pluginZip(type: Jar) {
     destinationDir = file("build/libs")
     baseName = project.ext.archivesBaseName
     version = project.version
-    classifier = 'plugin'
+    classifier = ''
     extension = 'zip'
 
     from("${project.buildDir}/zip-contents") {
