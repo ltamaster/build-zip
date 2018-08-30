@@ -29,6 +29,41 @@ task pluginZip(type: Jar) {
     }
 }
 
+pluginZip.doFirst {
+    def assetsDir = "${project.buildDir}/assets/resources"
+    def assetsMap = new Properties()
+    def assetsManifest = file("${assetsDir}/manifest.properties")
+    assetsManifest.withInputStream(assetsMap.&load)
+    def tokens = assetsMap + [
+            version    : version,
+            date       : new Date().toString(),
+            author     : sopsCopyright,
+            url        : sopsUrl,
+            title      : pluginName,
+            description: pluginDescription,
+            name       : archivesBaseName.toString(),
+    ]
+    copy {
+        //load asset mapping
+        from(assetsDir) {
+            into 'resources'
+        }
+
+        //to avoid the icon.png file will be unreadable
+        from("${project.projectDir}/src/main/rdplugin/resources"){
+            include '**/*.png'
+            into "resources"
+        }
+
+        from("${project.projectDir}/src/main/rdplugin") {
+            filter(ReplaceTokens, tokens: tokens)
+            exclude 'assets'
+            exclude '**/*.png'
+        }
+        into "${project.buildDir}/zip-contents"
+    }
+}
+
 apply plugin: 'maven-publish'
 
 publishing {
