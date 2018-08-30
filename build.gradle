@@ -52,9 +52,13 @@ pluginZip.doFirst {
             into "resources"
         }
         
+        from("${project.projectDir}/contents"){
+            into "contents"
+        }
+        
         println "${project.projectDir}"
 
-        from("${project.projectDir}") {
+        from("${project.projectDir}/plugin.yaml") {
             filter(ReplaceTokens, tokens: tokens)
             exclude 'assets'
             exclude '**/*.png'
