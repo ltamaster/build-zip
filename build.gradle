@@ -44,11 +44,15 @@ pluginZip.doFirst {
             description: pluginDescription,
             name       : archivesBaseName.toString(),
     ]
+    
+    print "en doFirst"
     copy {
         //load asset mapping
         from(assetsDir) {
             into 'resources'
         }
+        
+        print "en copy"
 
         //to avoid the icon.png file will be unreadable
         from("${project.projectDir}/resources"){
