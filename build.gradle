@@ -28,7 +28,6 @@ task pluginZip(type: Jar) {
 }
 
 pluginZip.doFirst {
-    def assetsDir = "${project.buildDir}/resources"
     def assetsMap = new Properties()
     def tokens = assetsMap + [
             version    : version,
@@ -39,24 +38,23 @@ pluginZip.doFirst {
             description: pluginDescription,
             name       : archivesBaseName.toString(),
     ]
-    
+
     copy {
-        //load asset mapping
-        from(assetsDir) {
-            into 'resources'
-        }
         
-        //to avoid the icon.png file will be unreadable
         from("${project.projectDir}/resources"){
             include '**/*.png'
             into "resources"
         }
-       
-        from("${project.projectDir}") {
+
+        from("${project.projectDir}/contents"){
+            into "contents"
+        }
+
+        from("${project.projectDir}/*.yaml") {
             filter(ReplaceTokens, tokens: tokens)
-            exclude 'assets'
             exclude '**/*.png'
         }
+        
         into "${project.buildDir}/zip-contents"
     }
 }
