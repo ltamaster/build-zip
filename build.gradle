@@ -50,7 +50,7 @@ pluginZip.doFirst {
             into "contents"
         }
 
-        from("${project.projectDir}/*.yaml") {
+        from("${project.projectDir}/plugin.yaml") {
             filter(ReplaceTokens, tokens: tokens)
             exclude '**/*.png'
         }
